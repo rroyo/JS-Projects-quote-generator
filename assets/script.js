@@ -11,13 +11,13 @@ const maxQuoteLength = 70;
 let apiQuotes;
 
 // Show Loading
-function loading() {
+function showLoadingSpinner() {
   loader.hidden = false;
   quoteContainer.hidden = true;
 }
 
 // Hide Loading
-function notLoading() {
+function hideLoadingSpinner() {
   loader.hidden = true;
   quoteContainer.hidden = false;
 }
@@ -28,13 +28,13 @@ function notLoading() {
 async function getQuotes() {
   try {
     const endpointURL = "https://jacintodesign.github.io/quotes-api/data/quotes.json";
-    loading();
+    showLoadingSpinner();
     const response = await fetch(endpointURL);
     apiQuotes = await response.json();
     const quote = getQuote();
     setQuote(quote);
     setTweetButtonLink(quote);
-    notLoading();
+    hideLoadingSpinner();
   } catch {
     (e) => console.error(e);
   }
